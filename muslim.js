@@ -51,17 +51,40 @@ if (!videoBackground || !rotateMessage || !videoSource) {
         videoBackground.load();
     }
 
+    // Function to scale the video dynamically
+    function resizeVideo() {
+        const aspectRatio = 16 / 9; // Adjust based on your video
+        const screenWidth = window.innerWidth;
+        const screenHeight = window.innerHeight;
+
+        if (screenWidth / screenHeight > aspectRatio) {
+            // Screen is wider than the video aspect ratio, fit by width
+            videoBackground.style.width = '100%';
+            videoBackground.style.height = 'auto';
+        } else {
+            // Screen is taller than the video aspect ratio, fit by height
+            videoBackground.style.width = 'auto';
+            videoBackground.style.height = '100%';
+        }
+    }
+
     // Warn user before leaving the page (unsaved work)
     window.addEventListener("beforeunload", (event) => {
         event.preventDefault();
         event.returnValue = "dont leave bb :c";
     });
 
-    // Listen for window resize to detect orientation changes
-    window.addEventListener('resize', handleOrientationChange);
+    // Listen for window resize to detect orientation changes and resize video
+    window.addEventListener('resize', () => {
+        handleOrientationChange();
+        resizeVideo();
+    });
 
-    // Ensure the correct video is shown initially
-    window.addEventListener('load', handleOrientationChange);
+    // Ensure the correct video is shown and resized initially
+    window.addEventListener('load', () => {
+        handleOrientationChange();
+        resizeVideo();
+    });
 
     // Handle tab visibility changes
     document.addEventListener('visibilitychange', function() {
@@ -76,14 +99,12 @@ if (!videoBackground || !rotateMessage || !videoSource) {
     document.fonts.load("1em 'SourGummy'").then((loaded) => {
         if (loaded.length === 0) {
             console.error("Failed to load 'SourGummy' font.");
-            // Fallback to a default font in case SourGummy doesn't load
             document.body.style.fontFamily = 'Arial, sans-serif';
         } else {
             console.log("SourGummy font loaded successfully.");
         }
     }).catch((err) => {
         console.error("Font loading error:", err);
-        // Fallback to a default font in case of error
         document.body.style.fontFamily = 'Arial, sans-serif';
     });
 
@@ -95,26 +116,7 @@ if (!videoBackground || !rotateMessage || !videoSource) {
 
     // Disable F12 and developer tools shortcuts
     document.addEventListener('keydown', function(e) {
-        // Disable F12
-        if (e.keyCode === 123) {
-            e.preventDefault();
-            console.log("F12 is disabled!");
-        }
-        // Disable Ctrl+Shift+I and other developer shortcuts
-        if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 75)) {
-            e.preventDefault();
-            console.log("Developer tools shortcut disabled!");
-        }
-    });
-
-    document.addEventListener('keydown', function(e) {
-        // Disable F12
-        if (e.key === 'F12') {
-            e.preventDefault();
-            console.log("F12 is disabled!");
-        }
-        // Disable Ctrl+Shift+I, Ctrl+Shift+J, and Ctrl+Shift+K (common developer tools shortcuts)
-        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'K')) {
+        if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 75))) {
             e.preventDefault();
             console.log("Developer tools shortcut disabled!");
         }
@@ -122,37 +124,30 @@ if (!videoBackground || !rotateMessage || !videoSource) {
 
     // Detect if DevTools are open
     let devToolsOpen = false;
-    const threshold = 160; // Screen size threshold to detect if DevTools are open
+    const threshold = 160;
     const clickHandler = () => {
         window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
     };
 
-    // Function to open a rickroll in a new tab
     function openRickroll() {
         window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
     }
 
-    // Detect DevTools using the window size
     setInterval(function() {
         const width = window.innerWidth;
         const height = window.innerHeight;
 
-        // Detect if DevTools are open by checking screen size
         if (width <= threshold || height <= threshold) {
             if (!devToolsOpen) {
                 devToolsOpen = true;
-                // Flood user with warnings
-                for (let i = 0; i < 5; i++) { // 5 alerts
+                for (let i = 0; i < 5; i++) {
                     alert("Developer tools are open! Do not inspect this page.");
                 }
                 console.log("DevTools Detected");
-
-                // Add the click handler to open rickroll tabs
                 document.addEventListener('click', clickHandler);
             }
         } else {
             devToolsOpen = false;
-            // Remove the click handler when DevTools are not open
             document.removeEventListener('click', clickHandler);
         }
     }, 1000);
