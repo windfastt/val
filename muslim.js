@@ -16,13 +16,26 @@ const deviceType = getDeviceType();
 
 // Get elements and check if they exist
 const videoBackground = document.getElementById('background-video');
+const gifBackground = document.getElementById('background-gif'); // Add GIF element
 const rotateMessage = document.getElementById('rotateMessage');
 const videoSource = document.getElementById('videoSource');
 
 // Failsafe: Exit if elements are missing
-if (!videoBackground || !rotateMessage || !videoSource) {
+if (!videoBackground || !rotateMessage || !videoSource || !gifBackground) {
     console.error("Missing required elements. Check your HTML.");
 } else {
+    // Function to show the GIF
+    function showGif() {
+        videoBackground.style.display = 'none';  // Hide video
+        gifBackground.style.display = 'block';  // Show GIF
+    }
+
+    // Function to show the video
+    function showVideo() {
+        videoBackground.style.display = 'block';  // Show video
+        gifBackground.style.display = 'none';  // Hide GIF
+    }
+
     // Detect if user is in portrait or landscape mode
     function handleOrientationChange() {
         const isPortrait = window.innerHeight > window.innerWidth;
@@ -41,10 +54,12 @@ if (!videoBackground || !rotateMessage || !videoSource) {
                     rotateMessage.innerText = "howd u get here lol (turn device)";
                 }
                 videoSource.src = 'rotate.mp4';  // Change to your desired video for portrait
+                showGif();  // Show GIF when in portrait mode
             }
         } else {
             rotateMessage.style.display = 'none';
             videoSource.src = 'background.mp4';  // Default background video
+            showVideo();  // Show video when in landscape or default mode
         }
 
         // Reload video if the source changes
