@@ -25,12 +25,6 @@ if (!videoBackground || !rotateMessage || !videoSource) {
         videoBackground.load();
     }
 
-    // Warn user before leaving the page (unsaved work)
-    window.addEventListener("beforeunload", (event) => {
-        event.preventDefault();
-        event.returnValue = "dont leave bb :c";
-    });
-
     // Listen for window resize to detect orientation changes
     window.addEventListener('resize', handleOrientationChange);
 
