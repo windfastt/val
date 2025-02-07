@@ -4,39 +4,21 @@ const rotateMessage = document.getElementById('rotateMessage');
 const backgroundVideo = document.getElementById('background-video');
 const videoSource = document.getElementById('videoSource');
 
-// Function to check the aspect ratio
-function checkAspectRatio() {
+// Function to check orientation and display rotate message if mobile in portrait mode
+function handleOrientationChange() {
+    const orientation = window.innerHeight > window.innerWidth ? 'portrait' : 'landscape';
+    
     if (isMobile) {
-        const isPortrait = window.innerHeight > window.innerWidth;
-        if (isPortrait) {
-            // Show the "rotate your phone" message for portrait mode
+        if (orientation === 'portrait') {
             rotateMessage.style.display = 'block';
-            videoSource.src = '';  // Hide video in portrait mode
+            backgroundVideo.style.display = 'none';  // Hide video in portrait
         } else {
-            // Hide the message and show the video in landscape mode
             rotateMessage.style.display = 'none';
-            videoSource.src = 'https://github.com/windfastt/val/raw/refs/heads/main/background.mp4';
+            backgroundVideo.style.display = 'block';  // Show video in landscape
         }
-    } else {
-        // If it's not mobile, keep the video visible regardless of orientation
-        rotateMessage.style.display = 'none';
-        videoSource.src = 'https://github.com/windfastt/val/raw/refs/heads/main/background.mp4';
     }
 }
 
-// Check every 100ms
-setInterval(checkAspectRatio, 100);
-
-// Ensure the correct video is shown initially
-window.addEventListener('load', checkAspectRatio);
-
-// Detect tab focus and visibility to pause/resume video
-function handleVisibilityChange() {
-    if (document.hidden) {
-        backgroundVideo.pause();
-    } else {
-        backgroundVideo.play();
-    }
-}
-
-document.addEventListener('visibilitychange', handleVisibilityChange);
+// Listen for window resize and load events to detect orientation changes
+window.addEventListener('resize', handleOrientationChange);
+window.addEventListener('load', handleOrientationChange);
