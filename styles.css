@@ -15,8 +15,8 @@ body {
     position: fixed; /* Fix the video in place */
     top: 0;
     left: 0;
-    width: 100vw; /* Full width of the viewport */
-    height: 100vh; /* Full height of the viewport */
+    width: 100%; /* Full width of the viewport */
+    height: 100%; /* Full height of the viewport */
     object-fit: cover; /* Ensure video covers the entire screen */
     z-index: -1; /* Send video to the background */
     pointer-events: none; /* Prevent video from interfering with other interactions */
