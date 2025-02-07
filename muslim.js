@@ -1,4 +1,8 @@
-// Check if the device is mobile based on the user agent
+window.addEventListener("beforeunload", (event) => {
+    event.preventDefault();
+    event.returnValue = " NOOOOOO DONT LEAVE"; 
+});
+
 const isMobile = /(Mobile|Android|iPad(?!.*Mobile)|Tablet)/i.test(navigator.userAgent);
 
 // Get elements and check if they exist
