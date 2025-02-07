@@ -18,10 +18,6 @@ body {
 }
 
 .video-background {
-    position: fixed; /* Fix the video in place */
-    top: 0;
-    left: 0;
-    object-fit: cover; /* Ensure video covers the entire screen */
     z-index: -1; /* Send video to the background */
     pointer-events: none; /* Prevent video from interfering with other interactions */
 }
