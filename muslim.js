@@ -1,24 +1,37 @@
-// Check if the device is mobile based on the user agent
-const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-const rotateMessage = document.getElementById('rotateMessage');
-const backgroundVideo = document.getElementById('background-video');
-const videoSource = document.getElementById('videoSource');
+// Regular expression to check for mobile, Android, iPad (without mobile), and tablet
+const isMobileDevice = /(Mobile|Android|iPad(?!.*Mobile)|Tablet)/.test(navigator.userAgent);
 
-// Function to check orientation and display rotate message if mobile in portrait mode
+// Get video and message elements
+const videoBackground = document.getElementById('background-video');
+const rotateMessage = document.getElementById('rotateMessage');
+
+// Function to check orientation and display message
 function handleOrientationChange() {
-    const orientation = window.innerHeight > window.innerWidth ? 'portrait' : 'landscape';
+    const isPortrait = window.innerHeight > window.innerWidth;
     
-    if (isMobile) {
-        if (orientation === 'portrait') {
-            rotateMessage.style.display = 'block';
-            backgroundVideo.style.display = 'none';  // Hide video in portrait
-        } else {
-            rotateMessage.style.display = 'none';
-            backgroundVideo.style.display = 'block';  // Show video in landscape
-        }
+    // Show or hide video based on user agent and orientation
+    if (isMobileDevice && isPortrait) {
+        rotateMessage.style.display = 'block'; // Show message to rotate
+        videoBackground.style.display = 'none'; // Hide background video
+    } else {
+        rotateMessage.style.display = 'none'; // Hide message
+        videoBackground.style.display = 'block'; // Show background video
     }
 }
 
-// Listen for window resize and load events to detect orientation changes
+// Listen for window resize to detect orientation changes
 window.addEventListener('resize', handleOrientationChange);
+
+// Ensure the correct behavior is applied initially
 window.addEventListener('load', handleOrientationChange);
+
+// Detect tab visibility changes
+function handleVisibilityChange() {
+    if (document.hidden) {
+        videoBackground.pause();
+    } else {
+        videoBackground.play();
+    }
+}
+
+document.addEventListener('visibilitychange', handleVisibilityChange);
