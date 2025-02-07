@@ -1,4 +1,7 @@
 const isMobile = /(Mobile|Android|iPad(?!.*Mobile)|Tablet)/i.test(navigator.userAgent);
+const isAndroid = /Android/i.test(navigator.userAgent);
+const isIphone = /iPhone/i.test(navigator.userAgent);
+const isIpad = /iPad/i.test(navigator.userAgent);
 
 // Get elements and check if they exist
 const videoBackground = document.getElementById('background-video');
@@ -15,6 +18,16 @@ if (!videoBackground || !rotateMessage || !videoSource) {
 
         if (isMobile && isPortrait) {
             rotateMessage.style.display = 'block';
+            // Set custom rotate message based on device type
+            if (isAndroid) {
+                rotateMessage.innerText = "rotate ur poor fucking android nigga LOOLL";
+            } else if (isIphone) {
+                rotateMessage.innerText = "Rotate phone 💔😞";
+            } else if (isIpad) {
+                rotateMessage.innerText = "Rotate ipad 💔😞";
+            } else {
+                rotateMessage.innerText = "howd u get here lol (turn device)";
+            }
             videoSource.src = 'rotate.mp4';  // Change to your desired video for portrait
         } else {
             rotateMessage.style.display = 'none';
