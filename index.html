@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Background Video</title>
+    <title>Background Video with Phone Tilt Detection</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="video-background">
-        <video autoplay loop muted>
+    <!-- Background video for desktop users -->
+    <div class="video-background" id="video-background">
+        <video id="backgroundVideo" autoplay loop muted>
             <source src="Timeline 1.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
+
+    <!-- Message for mobile users to rotate their phone -->
+    <div id="rotateMessage">Please rotate your phone to landscape mode.</div>
+
+    <script src="muslim.js"></script>
 </body>
 </html>
