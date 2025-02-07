@@ -8,6 +8,7 @@
 body {
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Prevent scrolling */
     font-family: 'SourGummy', Arial, sans-serif;
 }
 
