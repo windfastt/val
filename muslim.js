@@ -25,6 +25,12 @@ if (!videoBackground || !rotateMessage || !videoSource) {
         videoBackground.load();
     }
 
+    // Warn user before leaving the page (unsaved work)
+    window.addEventListener("beforeunload", (event) => {
+        event.preventDefault();
+        event.returnValue = "dont leave bb :c";
+    });
+
     // Listen for window resize to detect orientation changes
     window.addEventListener('resize', handleOrientationChange);
 
@@ -54,4 +60,74 @@ if (!videoBackground || !rotateMessage || !videoSource) {
         // Fallback to a default font in case of error
         document.body.style.fontFamily = 'Arial, sans-serif';
     });
+
+    // Disable right-click and log
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        console.log("Right-click is disabled!");
+    });
+
+    // Disable F12 and developer tools shortcuts
+    document.addEventListener('keydown', function(e) {
+        // Disable F12
+        if (e.keyCode === 123) {
+            e.preventDefault();
+            console.log("F12 is disabled!");
+        }
+        // Disable Ctrl+Shift+I and other developer shortcuts
+        if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 75)) {
+            e.preventDefault();
+            console.log("Developer tools shortcut disabled!");
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        // Disable F12
+        if (e.key === 'F12') {
+            e.preventDefault();
+            console.log("F12 is disabled!");
+        }
+        // Disable Ctrl+Shift+I, Ctrl+Shift+J, and Ctrl+Shift+K (common developer tools shortcuts)
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'K')) {
+            e.preventDefault();
+            console.log("Developer tools shortcut disabled!");
+        }
+    });
+
+    // Detect if DevTools are open
+    let devToolsOpen = false;
+    const threshold = 160; // Screen size threshold to detect if DevTools are open
+    const clickHandler = () => {
+        window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+    };
+
+    // Function to open a rickroll in a new tab
+    function openRickroll() {
+        window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+    }
+
+    // Detect DevTools using the window size
+    setInterval(function() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        // Detect if DevTools are open by checking screen size
+        if (width <= threshold || height <= threshold) {
+            if (!devToolsOpen) {
+                devToolsOpen = true;
+                // Flood user with warnings
+                for (let i = 0; i < 5; i++) { // 5 alerts
+                    alert("Developer tools are open! Do not inspect this page.");
+                }
+                console.log("DevTools Detected");
+
+                // Add the click handler to open rickroll tabs
+                document.addEventListener('click', clickHandler);
+            }
+        } else {
+            devToolsOpen = false;
+            // Remove the click handler when DevTools are not open
+            document.removeEventListener('click', clickHandler);
+        }
+    }, 1000);
 }
