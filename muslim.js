@@ -1,7 +1,18 @@
-const isMobile = /(Mobile|Android|iPad(?!.*Mobile)|Tablet)/i.test(navigator.userAgent);
-const isAndroid = /Android/i.test(navigator.userAgent);
-const isIphone = /iPhone/i.test(navigator.userAgent);
-const isIpad = /iPad/i.test(navigator.userAgent);
+// Function to get device type
+function getDeviceType() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    
+    if (/mobile|android|iphone|ipod|blackberry|iemobile|opera mini/.test(userAgent)) {
+        return "Mobile";
+    } else if (/tablet|ipad|playbook|silk/.test(userAgent)) {
+        return "Tablet";
+    } else {
+        return "Desktop";
+    }
+}
+
+// Get device type
+const deviceType = getDeviceType();
 
 // Get elements and check if they exist
 const videoBackground = document.getElementById('background-video');
@@ -12,23 +23,25 @@ const videoSource = document.getElementById('videoSource');
 if (!videoBackground || !rotateMessage || !videoSource) {
     console.error("Missing required elements. Check your HTML.");
 } else {
-    // Detect if mobile user is in portrait or landscape mode
+    // Detect if user is in portrait or landscape mode
     function handleOrientationChange() {
         const isPortrait = window.innerHeight > window.innerWidth;
 
-        if (isMobile && isPortrait) {
+        if (deviceType === "Mobile" && isPortrait) {
             rotateMessage.style.display = 'block';
             // Set custom rotate message based on device type
-            if (isAndroid) {
-                rotateMessage.innerText = "rotate ur poor fucking android nigga LOOLL";
-            } else if (isIphone) {
-                rotateMessage.innerText = "Rotate phone 💔😞";
-            } else if (isIpad) {
-                rotateMessage.innerText = "Rotate ipad 💔😞";
-            } else {
-                rotateMessage.innerText = "howd u get here lol (turn device)";
+            if (deviceType === "Mobile") {
+                if (/android/i.test(navigator.userAgent)) {
+                    rotateMessage.innerText = "rotate ur poor fucking android nigga LOOLL";
+                } else if (/iphone/i.test(navigator.userAgent)) {
+                    rotateMessage.innerText = "Rotate phone 💔😞";
+                } else if (/ipad/i.test(navigator.userAgent)) {
+                    rotateMessage.innerText = "Rotate ipad 💔😞";
+                } else {
+                    rotateMessage.innerText = "howd u get here lol (turn device)";
+                }
+                videoSource.src = 'rotate.mp4';  // Change to your desired video for portrait
             }
-            videoSource.src = 'rotate.mp4';  // Change to your desired video for portrait
         } else {
             rotateMessage.style.display = 'none';
             videoSource.src = 'background.mp4';  // Default background video
