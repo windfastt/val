@@ -6,25 +6,27 @@
 
 /* General Body */
 html, body {
+    width: 100vw;
+    height: 100vh;
     overflow: hidden; /* Prevent scrolling */
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Prevent scrolling */
     font-family: 'SourGummy', Arial, sans-serif;
+    background: black; /* Prevents white background flickering */
 }
 
 /* Video Background */
 .video-background {
-    position: absolute; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Prevent cropping, scale down while keeping aspect ratio */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    object-fit: contain; /* Prevent cropping, maintain aspect ratio */
     z-index: -1;
     pointer-events: none;
 }
