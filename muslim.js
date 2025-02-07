@@ -1,8 +1,3 @@
-window.addEventListener("beforeunload", (event) => {
-    event.preventDefault();
-    event.returnValue = " NOOOOOO DONT LEAVE"; 
-});
-
 const isMobile = /(Mobile|Android|iPad(?!.*Mobile)|Tablet)/i.test(navigator.userAgent);
 
 // Get elements and check if they exist
@@ -20,17 +15,21 @@ if (!videoBackground || !rotateMessage || !videoSource) {
 
         if (isMobile && isPortrait) {
             rotateMessage.style.display = 'block';
-            videoSource.src = 'rotate.mp4';
+            videoSource.src = 'rotate.mp4';  // Change to your desired video for portrait
         } else {
             rotateMessage.style.display = 'none';
-            videoSource.src = 'background.mp4';
+            videoSource.src = 'background.mp4';  // Default background video
         }
 
         // Reload video if the source changes
-        if (videoBackground.load) {
-            videoBackground.load();
-        }
+        videoBackground.load();
     }
+
+    // Warn user before leaving the page (unsaved work)
+    window.addEventListener("beforeunload", (event) => {
+        event.preventDefault();
+        event.returnValue = "dont leave bb :c";
+    });
 
     // Listen for window resize to detect orientation changes
     window.addEventListener('resize', handleOrientationChange);
@@ -47,10 +46,18 @@ if (!videoBackground || !rotateMessage || !videoSource) {
         }
     });
 
-    // Check if the font loads properly
+    // Check if the font loads properly with fallback
     document.fonts.load("1em 'SourGummy'").then((loaded) => {
-        if (!loaded.length) {
+        if (loaded.length === 0) {
             console.error("Failed to load 'SourGummy' font.");
+            // Fallback to a default font in case SourGummy doesn't load
+            document.body.style.fontFamily = 'Arial, sans-serif';
+        } else {
+            console.log("SourGummy font loaded successfully.");
         }
-    }).catch((err) => console.error("Font loading error:", err));
+    }).catch((err) => {
+        console.error("Font loading error:", err);
+        // Fallback to a default font in case of error
+        document.body.style.fontFamily = 'Arial, sans-serif';
+    });
 }
