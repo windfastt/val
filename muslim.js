@@ -66,20 +66,30 @@ if (!videoBackground || !rotateMessage || !videoSource || !gifBackground) {
         videoBackground.load();
     }
 
-    // Function to scale the video dynamically
-    function resizeVideo() {
-        const aspectRatio = 16 / 9; // Adjust based on your video
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
+    // Function to scale the video dynamically based on the available space
+    function resizeBackground() {
+        const aspectRatio = 16 / 9; // Video aspect ratio, adjust if necessary
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
 
-        if (screenWidth / screenHeight > aspectRatio) {
-            // Screen is wider than the video aspect ratio, fit by width
+        // Set the video width and height while maintaining the aspect ratio
+        if (windowWidth / windowHeight > aspectRatio) {
+            // Wider window: fit by height
+            videoBackground.style.height = '100%';
+            videoBackground.style.width = 'auto';
+        } else {
+            // Taller window: fit by width
             videoBackground.style.width = '100%';
             videoBackground.style.height = 'auto';
+        }
+
+        // Scale GIF similarly
+        if (windowWidth / windowHeight > aspectRatio) {
+            gifBackground.style.height = '100%';
+            gifBackground.style.width = 'auto';
         } else {
-            // Screen is taller than the video aspect ratio, fit by height
-            videoBackground.style.width = 'auto';
-            videoBackground.style.height = '100%';
+            gifBackground.style.width = '100%';
+            gifBackground.style.height = 'auto';
         }
     }
 
@@ -92,13 +102,13 @@ if (!videoBackground || !rotateMessage || !videoSource || !gifBackground) {
     // Listen for window resize to detect orientation changes and resize video
     window.addEventListener('resize', () => {
         handleOrientationChange();
-        resizeVideo();
+        resizeBackground();
     });
 
     // Ensure the correct video is shown and resized initially
     window.addEventListener('load', () => {
         handleOrientationChange();
-        resizeVideo();
+        resizeBackground();
     });
 
     // Handle tab visibility changes
