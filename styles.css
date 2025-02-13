@@ -26,7 +26,7 @@ html, body {
     width: 100vw;
     height: 100vh;
     transform: translate(-50%, -50%);
-    object-fit: contain; /* Prevent cropping, maintain aspect ratio */
+    object-fit: cover; /* Covers entire screen */
     z-index: -1;
     pointer-events: none;
 }
@@ -41,7 +41,7 @@ html, body {
     transform: translate(-50%, -50%);
     object-fit: contain; /* Ensures image maintains aspect ratio */
     pointer-events: none; /* Makes it untouchable */
-    z-index: 0; /* Ensures it stays above the video but below any UI elements */
+    z-index: 1; /* Places it above the video */
 }
 
 /* Rotate Message */
@@ -54,7 +54,7 @@ html, body {
     color: white;
     text-align: center;
     display: none; /* Initially hidden */
-    z-index: 1;
+    z-index: 2; /* Ensures it stays above the overlay */
 }
 
 /* Media Query for Mobile Devices */
