@@ -6,16 +6,17 @@
 
 /* General Body */
 html, body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden; /* Prevent scrolling */
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden; /* Prevent scrolling */
+    font-family: 'SourGummy', Arial, sans-serif;
+    background: black; /* Prevents white background flickering */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'SourGummy', Arial, sans-serif;
-    background: black; /* Prevents white background flickering */
+    position: relative;
 }
 
 /* Video Background */
@@ -26,7 +27,7 @@ html, body {
     width: 100vw;
     height: 100vh;
     transform: translate(-50%, -50%);
-    object-fit: cover; /* Covers entire screen */
+    object-fit: cover; /* Ensures the video fills the screen without distortion */
     z-index: -1;
     pointer-events: none;
 }
@@ -36,10 +37,10 @@ html, body {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     transform: translate(-50%, -50%);
-    object-fit: contain; /* Ensures image maintains aspect ratio */
+    object-fit: contain; /* Ensures the image maintains its aspect ratio */
     pointer-events: none; /* Makes it untouchable */
     z-index: 1; /* Places it above the video */
 }
