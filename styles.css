@@ -31,6 +31,19 @@ html, body {
     pointer-events: none;
 }
 
+/* Overlay Image (Thinkdone) */
+.overlay-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    transform: translate(-50%, -50%);
+    object-fit: contain; /* Ensures image maintains aspect ratio */
+    pointer-events: none; /* Makes it untouchable */
+    z-index: 0; /* Ensures it stays above the video but below any UI elements */
+}
+
 /* Rotate Message */
 #rotateMessage {
     position: absolute;
