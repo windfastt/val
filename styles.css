@@ -12,87 +12,87 @@ html, body {
     padding: 0;
     overflow: hidden; /* Prevent scrolling */
     font-family: 'SourGummy', Arial, sans-serif;
-    background: black; /* Prevents white flickering before video loads */
+    background: black; /* Prevents white background flickering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
-/* Background Layer */
+/* Background Wrapper (Video and GIF) */
 #background-wrapper {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -100; /* Ensures it's always behind everything */
-    pointer-events: none; /* Prevents interaction with background */
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Background stays behind content */
 }
 
 /* Video Background */
 .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures video fills screen without distortion */
+    object-fit: cover; /* Keeps aspect ratio and fills screen */
+    pointer-events: none;
 }
 
 /* Overlay Image (GIF) */
 .overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures image fills screen without distortion */
-    display: none; /* Initially hidden, shown via JS */
+    object-fit: cover;
+    pointer-events: none;
 }
 
-/* Content Layer (Independent of Background) */
+/* Content Wrapper - Ensures text is above the background */
 #content-wrapper {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10; /* Ensures content stays above background */
+    z-index: 2; /* Content is above background */
     text-align: center;
-    width: 100%;
-    max-width: 90vw; /* Prevents text from stretching too wide */
 }
 
-/* Valentine Message */
+/* Valentine Message Styling */
 #valentineMessage {
-    font-size: 2rem;
+    font-size: 3rem;
     color: white;
     font-family: 'SourGummy', Arial, sans-serif;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds readability */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Optional: Adds contrast */
 }
 
 /* Rotate Message */
 #rotateMessage {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.7); /* Dark background for better visibility */
-    padding: 10px 20px;
-    border-radius: 5px;
     font-size: 2rem;
     color: white;
     text-align: center;
     display: none;
-    z-index: 20;
+    z-index: 3;
 }
 
-/* Responsive Design Adjustments */
+/* Media Query for Mobile Devices */
 @media only screen and (max-width: 767px) {
     #valentineMessage {
-        font-size: 1.5rem;
+        font-size: 2rem; /* Adjust font size for mobile */
     }
-
     #rotateMessage {
         font-size: 1.5rem;
     }
 }
 
+/* Media Query for Tablet Devices */
 @media only screen and (max-width: 1024px) {
     #valentineMessage {
-        font-size: 1.75rem;
+        font-size: 2.5rem; /* Adjust font size for tablets */
     }
-
     #rotateMessage {
         font-size: 1.75rem;
     }

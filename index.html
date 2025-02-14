@@ -1,16 +1,24 @@
 <body>
-    <!-- Background Layer (separate from content) -->
-    <div id="background-container">
-        <video id="background-video" autoplay loop muted>
-            <source id="videoSource" src="background.mp4" type="video/mp4">
+    <!-- Background Container -->
+    <div id="background-wrapper">
+        <video autoplay muted loop id="background-video" class="video-background">
+            <source src="background.mp4" type="video/mp4">
         </video>
-        <img id="background-gif" src="background.gif" style="display: none;">
+        <img id="background-gif" src="background.gif" class="overlay-image" style="display: none;">
     </div>
 
-    <!-- Content Layer (completely separate) -->
-    <div id="content-layer">
-        <div id="rotateMessage" style="display: none;">Rotate your device</div>
-        <h1>Welcome</h1>
-        <button>Click Me</button>
+    <!-- Main Content Container -->
+    <div class="container">
+        <div id="valentineMessage">Will you be my Valentine?</div>
+        <div class="buttons">
+            <button class="yes-button"></button>
+            <button class="no-button"></button>
+        </div>
     </div>
+
+    <!-- Rotate Message -->
+    <div id="rotateMessage"></div>
+
+    <script src="muslim.js"></script>
 </body>
+
