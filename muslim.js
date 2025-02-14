@@ -37,40 +37,65 @@ if (!videoBackground || !rotateMessage || !videoSource || !gifBackground) {
     }
 
     // Detect if user is in portrait or landscape mode
+
     function handleOrientationChange() {
+
         const isPortrait = window.innerHeight > window.innerWidth;
 
+
+
         if (deviceType === "Mobile" && isPortrait) {
+
             rotateMessage.style.display = 'block';
+
             // Set custom rotate message based on device type
+
             if (deviceType === "Mobile") {
+
                 if (/android/i.test(navigator.userAgent)) {
+
                     rotateMessage.innerText = "rotate ur poor fucking android nigga LOOLL";
+
                 } else if (/iphone/i.test(navigator.userAgent)) {
+
                     rotateMessage.innerText = "Rotate phone 💔😞";
+
                 } else if (/ipad/i.test(navigator.userAgent)) {
+
                     rotateMessage.innerText = "Rotate ipad 💔😞";
+
                 } else {
+
                     rotateMessage.innerText = "howd u get here lol (turn device)";
+
                 }
+
                 videoSource.src = 'rotate.mp4';  // Change to your desired video for portrait
+
                 showGif();  // Show GIF when in portrait mode
+
             }
+
         } else {
+
             rotateMessage.style.display = 'none';
+
             videoSource.src = 'background.mp4';  // Default background video
+
             showVideo();  // Show video when in landscape or default mode
+
         }
 
+
+
         // Reload video if the source changes
+
         videoBackground.load();
+
     }
 
     // Function to scale the video dynamically based on the available space
     function resizeBackground() {
-        const windowWidth = window.innerWidth;
-        const windowHeight = window.innerHeight;
-
         // Set the video width and height to fill the available space
         videoBackground.style.width = '100%';
         videoBackground.style.height = '100%';
@@ -107,14 +132,17 @@ if (!videoBackground || !rotateMessage || !videoSource || !gifBackground) {
         }
     });
 
-    // Check if the font loads properly with fallback
     document.fonts.ready.then(() => {
-        console.log("SourGummy font loaded successfully.");
-    }).catch((err) => {
-        console.error("Font loading error:", err);
-        document.body.style.fontFamily = 'Arial, sans-serif'; // Fallback font
-    });
 
+        console.log("SourGummy font loaded successfully.");
+
+    }).catch((err) => {
+
+        console.error("Font loading error:", err);
+
+        document.body.style.fontFamily = 'Arial, sans-serif'; // Fallback font
+
+    });
 
     // Disable right-click and log
     document.addEventListener('contextmenu', function(e) {
