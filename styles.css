@@ -71,6 +71,10 @@ html, body {
 
 /* Media Query for Mobile Devices */
 @media only screen and (max-width: 767px) {
+    #valentineMessage {
+        font-size: 1.5rem; /* Adjust the font size for mobile */
+    }
+
     #rotateMessage {
         font-size: 1.5rem;
     }
@@ -78,6 +82,10 @@ html, body {
 
 /* Media Query for Tablet Devices */
 @media only screen and (max-width: 1024px) {
+    #valentineMessage {
+        font-size: 1.75rem; /* Adjust font size for tablets */
+    }
+
     #rotateMessage {
         font-size: 1.75rem;
     }
