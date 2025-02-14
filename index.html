@@ -1,17 +1,21 @@
 <body>
-    <!-- Video Background -->
-    <video autoplay muted loop id="background-video" class="video-background">
-        <source id="videoSource" src="background.mp4" type="video/mp4">
-    </video>
+    <!-- Background Wrapper: This contains the video and GIF background -->
+    <div id="background-wrapper">
+        <!-- Video Background -->
+        <video autoplay muted loop id="background-video" class="video-background">
+            <source id="videoSource" src="background.mp4" type="video/mp4">
+        </video>
+
+        <!-- Background GIF (Initially hidden) -->
+        <img id="background-gif" src="background.gif" class="video-background" alt="Background GIF" 
+             style="display: none; width: 100%; height: 100%; object-fit: cover;">
+    </div>
     
-    <!-- Background GIF (Initially hidden) -->
-    <img id="background-gif" src="background.gif" class="video-background" alt="Background GIF" 
-         style="display: none; width: 100%; height: 100%; object-fit: cover;">
-
-    <!-- Valentine message (Layer 2 - Text on top of background) -->
-    <div id="valentineMessage">Do you want to be my valentines?</div>
-
-    <div id="rotateMessage" style="display: none;"></div> 
+    <!-- Content Wrapper: This will contain the text and future buttons -->
+    <div id="content-wrapper">
+        <div id="valentineMessage">Do you want to be my valentines?</div>
+        <!-- Future buttons and other content will go here -->
+    </div>
 
     <script src="muslim.js"></script>
 </body>
