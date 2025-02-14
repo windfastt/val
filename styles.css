@@ -22,12 +22,11 @@ html, body {
 /* Video Background */
 .video-background {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100vw;
-    height: 100vh;
-    transform: translate(-50%, -50%);
-    object-fit: cover; /* Ensures the video fills the screen without distortion */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill; /* Forces stretching, ignoring aspect ratio */
     z-index: -1;
     pointer-events: none;
 }
@@ -35,14 +34,13 @@ html, body {
 /* Overlay Image (Thinkdone) */
 .overlay-image {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    transform: translate(-50%, -50%);
-    object-fit: contain; /* Ensures the image maintains its aspect ratio */
-    pointer-events: none; /* Makes it untouchable */
-    z-index: 1; /* Places it above the video */
+    object-fit: fill; /* Forces full stretch */
+    pointer-events: none;
+    z-index: 1;
 }
 
 /* Rotate Message */
@@ -54,20 +52,20 @@ html, body {
     font-size: 2rem;
     color: white;
     text-align: center;
-    display: none; /* Initially hidden */
-    z-index: 2; /* Ensures it stays above the overlay */
+    display: none;
+    z-index: 2;
 }
 
 /* Media Query for Mobile Devices */
 @media only screen and (max-width: 767px) {
     #rotateMessage {
-        font-size: 1.5rem; /* Smaller font size for mobile */
+        font-size: 1.5rem;
     }
 }
 
 /* Media Query for Tablet Devices */
 @media only screen and (max-width: 1024px) {
     #rotateMessage {
-        font-size: 1.75rem; /* Adjust font size for tablets */
+        font-size: 1.75rem;
     }
 }
