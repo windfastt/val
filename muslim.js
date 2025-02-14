@@ -108,17 +108,13 @@ if (!videoBackground || !rotateMessage || !videoSource || !gifBackground) {
     });
 
     // Check if the font loads properly with fallback
-    document.fonts.load("1em 'SourGummy'").then((loaded) => {
-        if (loaded.length === 0) {
-            console.error("Failed to load 'SourGummy' font.");
-            document.body.style.fontFamily = 'Arial, sans-serif';
-        } else {
-            console.log("SourGummy font loaded successfully.");
-        }
+    document.fonts.ready.then(() => {
+        console.log("SourGummy font loaded successfully.");
     }).catch((err) => {
         console.error("Font loading error:", err);
-        document.body.style.fontFamily = 'Arial, sans-serif';
+        document.body.style.fontFamily = 'Arial, sans-serif'; // Fallback font
     });
+
 
     // Disable right-click and log
     document.addEventListener('contextmenu', function(e) {
