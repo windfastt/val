@@ -43,6 +43,19 @@ html, body {
     z-index: 1; /* Places it above the video */
 }
 
+/* Valentine message styling */
+#valentineMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
+    font-family: 'SourGummy', Arial, sans-serif;
+    text-align: center;
+    z-index: 3; /* Makes sure it's above other elements */
+}
+
 /* Rotate Message */
 #rotateMessage {
     position: absolute;
