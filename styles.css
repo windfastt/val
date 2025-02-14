@@ -26,21 +26,21 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: fill; /* Forces stretching, ignoring aspect ratio */
+    object-fit: fill;  /* Forces the video to fill the screen without keeping aspect ratio */
     z-index: -1;
     pointer-events: none;
 }
 
-/* Overlay Image (Thinkdone) */
+/* Overlay Image (GIF) */
 .overlay-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: fill; /* Forces full stretch */
+    object-fit: fill;  /* Forces the image to fill the screen without keeping aspect ratio */
     pointer-events: none;
-    z-index: 1;
+    z-index: 1; /* Places it above the video */
 }
 
 /* Rotate Message */

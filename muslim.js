@@ -68,29 +68,16 @@ if (!videoBackground || !rotateMessage || !videoSource || !gifBackground) {
 
     // Function to scale the video dynamically based on the available space
     function resizeBackground() {
-        const aspectRatio = 16 / 9; // Video aspect ratio, adjust if necessary
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
 
-        // Set the video width and height while maintaining the aspect ratio
-        if (windowWidth / windowHeight > aspectRatio) {
-            // Wider window: fit by height
-            videoBackground.style.height = '100%';
-            videoBackground.style.width = 'auto';
-        } else {
-            // Taller window: fit by width
-            videoBackground.style.width = '100%';
-            videoBackground.style.height = 'auto';
-        }
+        // Set the video width and height to fill the available space
+        videoBackground.style.width = '100%';
+        videoBackground.style.height = '100%';
 
         // Scale GIF similarly
-        if (windowWidth / windowHeight > aspectRatio) {
-            gifBackground.style.height = '100%';
-            gifBackground.style.width = 'auto';
-        } else {
-            gifBackground.style.width = '100%';
-            gifBackground.style.height = 'auto';
-        }
+        gifBackground.style.width = '100%';
+        gifBackground.style.height = '100%';
     }
 
     // Warn user before leaving the page (unsaved work)
