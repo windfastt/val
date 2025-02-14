@@ -10,9 +10,13 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: hidden; /* Prevent scrolling */
     font-family: 'SourGummy', Arial, sans-serif;
-    background: black;
+    background: black; /* Prevents white background flickering */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 /* Background Wrapper */
