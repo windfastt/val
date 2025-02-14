@@ -2,7 +2,7 @@
 function getDeviceType() {
     const userAgent = navigator.userAgent.toLowerCase();
     
-    if (/mobile|android|iphone|ipod|blackberry|iemobile|opera mini/.test(userAgent)) {
+    if (/android|iphone|ipod|blackberry|iemobile|opera mini/.test(userAgent)) {
         return "Mobile";
     } else if (/tablet|ipad|playbook|silk/.test(userAgent)) {
         return "Tablet";
@@ -45,13 +45,13 @@ if (!videoBackground || !rotateMessage || !videoSource || !gifBackground) {
             // Set custom rotate message based on device type
             if (deviceType === "Mobile") {
                 if (/android/i.test(navigator.userAgent)) {
-                    rotateMessage.innerText = "Rotate your Android device 💔😞";
+                    rotateMessage.innerText = "rotate ur poor fucking android nigga LOOLL";
                 } else if (/iphone/i.test(navigator.userAgent)) {
-                    rotateMessage.innerText = "Rotate your iPhone 💔😞";
+                    rotateMessage.innerText = "Rotate phone 💔😞";
                 } else if (/ipad/i.test(navigator.userAgent)) {
-                    rotateMessage.innerText = "Rotate your iPad 💔😞";
+                    rotateMessage.innerText = "Rotate ipad 💔😞";
                 } else {
-                    rotateMessage.innerText = "Please rotate your device to landscape mode.";
+                    rotateMessage.innerText = "howd u get here lol (turn device)";
                 }
                 videoSource.src = 'rotate.mp4';  // Change to your desired video for portrait
                 showGif();  // Show GIF when in portrait mode
@@ -83,7 +83,7 @@ if (!videoBackground || !rotateMessage || !videoSource || !gifBackground) {
     // Warn user before leaving the page (unsaved work)
     window.addEventListener("beforeunload", (event) => {
         event.preventDefault();
-        event.returnValue = "Are you sure you want to leave? Unsaved work may be lost!";
+        event.returnValue = "dont leave bb :c";
     });
 
     // Listen for window resize to detect orientation changes and resize video
